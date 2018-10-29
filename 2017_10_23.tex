@@ -1,0 +1,183 @@
+\documentclass[main.tex]{subfiles}
+% vl 23.10.18
+
+\begin{document}
+
+\setcounter{chapter}{2}
+\setcounter{satz}{5}
+Nach Einführung dieser Begriffe, stellt sich die Frage: Welche Funktionen sind \suhs{}?
+In der Übung leitet wir desweiteren Rechenregeln für \suhs{}e Funktionen her.
+Man beobachtet, dass nicht alle stetigen Funktionen schwach unterhalb stetig sind:
+
+\begin{bsp}\label{2.6}$ $\\[-1em]
+\begin{itemize}
+\item Im Endlichdimenisonalen, z.B. für $F\colon ℝ\to ℝ$ folgt aus $F$ stetig, dass $F$ auch \suhs{}.
+\item Wir untersuchen ein Gegenbeispiel im Unendlichdimensionalen:\\
+Sei $X = L^2([0,2π]) = M$ und 
+$$f\colon X\to ℝ, f(x) = -\int_0^{2π} \left(x(t)\right)^2~dt = -\| x\|_{L^2}^2.$$
+Offensichtlich ist $f$ stetig.
+Wir betrachten die Folge
+$$x_n(t) := \frac{1}{\sqrt{π}} \sin (nt), \qquad n\in ℕ.$$
+Für $g\in L^2([0,2π])$ folgt, dass
+$$\int_0^{2π} g(t) \frac{1}{\sqrt{π}}\sin(nt)~dt$$
+der $n$-te Fourier-Koeffizient bzgl. des Orthonormalsystems $\left\{ \frac{1}{\sqrt{π}}\sin(nt)\right\}$ ist. Dann folgt aber auch
+$$\int_0^{2π} g(t) \frac{1}{\sqrt{π}} \sin (nt)~dt \to 0.$$
+Da $g\in L^2([0,2π])$ beliebig war folgt mit Lax-Milgram $x_n \wto 0$.
+Aber es gilt $f(x_n) = -1$ und $f(0) = 0$, also
+$$\liminf_{n\to ∞} f(x_n) = -1 < 0$$
+und $f$ ist nicht \suhs{}.  
+\end{itemize}
+\end{bsp}
+
+\subsection*{Welche zusätzlichen Eigenschaften sichern schwache Unterhalb-Stetigkeit?}
+
+\begin{mydef}\label{2.7}
+Es sei $X$ ein reeller Vektorraum und $M\subseteq X$.
+Die Menge $M$ heißt konvex, wenn für $x,y\in M$ und $λ\in [0,1]$ gilt
+$$λx + (1-λ) y \in M\qquad ∀λ\in [0,1].$$
+% standardskizze: konvexe Menge und nicht-konvexe Menge
+Sei $M\ne ∅$ und konvex. Dann heißt eine Funktion $f\colon M\to ℝ$ heißt konvex wenn
+$$f(λx + (1-λ)y)) \le λf(x) + (1-λ) f(y) \qquad ∀ x,y\in M, ∀λ\in [0,1].$$
+% standardskizze: konvexe Funktion.
+\end{mydef}
+
+\begin{bsp}\label{2.8}$ $\\[-1em]
+\begin{itemize}
+\item Sei $X = C^1([0,1]), M = C_0^1([0,1])$. Dann ist $M$ eine konvexe Menge, denn für $x,y \in M$ ist auch $λx + (1-λ)y \in C^1([0,1])$ und am Rand gilt
+$$\left( λx + (1-λ) y \right)(0) = λx(0) + (1-λ) y(0) = 0$$
+(1 analog), also $λx + (1-λ) y \in C_0^1 \left( [0,1] \right).$
+\item Sei $X$ ein reeller Vektorraum. Dann ist jede Norm auf $X$ eine konvexe Funktion,
+denn 
+$$\| λx + (1-λ) y \| \le \| \underbrace{λ}_{\ge 0} x \| + \| \underbrace{(1-λ)}_{\ge 0} y \| = λ\| x\| + (1-λ) \| y\|, \qquad λ\in [0,1].$$ 
+\end{itemize}
+\end{bsp}
+
+\begin{satz}\label{2.9}
+Sei $(X, \|•\|)$ ein normierter Raum, $M\subseteq X, M\ne ∅$ und $M$ konvex. Sei ferner $f\colon M\to ℝ.$ Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+\item \label{2.9.1} $f$ ist konvex.
+\item \label{2.9.2} $E(f)$ ist konvex.
+\end{enumerate}
+Außerdem folgt aus einer dieser Aussagen, dass
+\begin{enumerate}[label=(\roman*)]
+\setcounter{enumi}{2}
+\item \label{2.9.3} $M_α = \{ x\in M: f(x) \le α \}$ ist für jedes $α\in ℝ$ konvex. 
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+Wir zeigen zunächst \ref{2.9.1} $\Rightarrow$ \ref{2.9.2}. Sei dazu $f$ konvex. Dann gilt für $(x,α),(y,β)\in E(f)$ und $λ\in [0,1]$:
+\begin{align*}
+f(λx+ (1-λ) y) &\stackrel{\text{$f$ konvex}}\le λf(x) + (1-λ) f(y)\\
+&\stackrel{(x,α), (y,β)\in E(f)}\le λα + (1-λ) β
+\end{align*}
+und somit 
+$$λ(x, α) + (1-λ) (y,β) \in E(f) \qquad ∀λ\in [0,1].$$
+Also ist $E(f)$ konvex.
+
+Jetzt gelte \ref{2.9.2}, es sei also $E(f)$ konvex. Wir zeigen \ref{2.9.3}. 
+Sei $α\in ℝ$ so, dass $M_α\ne ∅$. Dann gilt für $x,y \in M_α$ und $λ\in [0,1]$, dass
+$$λ(x,α) + (1-λ) (y,α)\in E(f)$$
+und damit 
+$$f(λx + (1-λ) y ) \le λα + (1-λ) α = α.$$
+Daraus folgt
+$λx + (1-λ) y \in M_α$ und $M_α$ ist also konvex.
+
+Schließlich folgern wir \ref{2.9.1} aus \ref{2.9.2}. Sei $E(f)$ konvex. Dann gilt für $x,y\in M$ und $λ\in [0,1]$ wegen $λ(x,f(x)) + (1-λ) (y,f(y))\in E(f)$, dass
+$$f(λx + (1-λ)y) \le λf(x) + (1-λ) f(y).$$
+Also ist $f$ konvex.
+\end{proof}
+
+\begin{bem*}
+Aus der Konvexität des Levelsets $M_α$ folgt \emph{nicht} die Konvexität von $f$.
+\end{bem*}
+
+\begin{bsp}\label{2.10}
+Sei $f\colon ℝ\to ℝ$ mit
+$$f(x) = \begin{cases}
+(x-2)^2 &\text{für $x<2$},\\
+(x-2)^2 + 1 &\text{für $x\ge 2$}.\end{cases}$$
+% skizze plot 
+Offensichtlich ist $M_α = [\underline x_α, \ov x_α]$ für $α\ge 1$ und $M_α = [\underline x_α, \ov x_α )$ für $α<1$. Intervalle in $ℝ$ sind Konvex, aber $f$ ist nicht konvex.
+
+Sei alternativ
+$$f\colon ℝ\to ℝ, f(x) = \begin{cases}
+(x-2)^2 + 1 &\text{für $x>2$},\\
+-(x-2)^2 +1 &\text{für $x\le 2$}.\end{cases}$$
+%skizze plot
+Dann gilt $M_α = (-∞ ,\ov x_α]$ ist konvex, $f$ stetig, aber nicht konvex.
+\end{bsp}
+
+Diese Beispiele motivieren entsprechende Verallgemeinerungen:
+\begin{mydef}\label{2.11}[Quasikonvexität]
+Sei $(X, \|•\|)$ ein normierter, linearer Raum, $M\subset X, M\ne ∅$ und konvex und $f\colon M\to ℝ$. Ist für jedes $α\in ℝ$ die Menge $M_α := \{ x\in M: f(x) \le α\}$ konvex, so heißt $f$ \bemph{quasikonvex}.
+\end{mydef}
+
+\begin{lemma}\label{2.12} Sei $(X, \| •\|)$ ein normierter Raum, $M\subset X, M\ne ∅$ konvex und abgeschlossen. Ist $f\colon M\to ℝ$ stetig und quasikonvex, dann ist $f$ \suhs{}.
+\end{lemma}
+
+\begin{proof}[Beweisskizze]
+Sei $α \in ℝ$ beliebig gewählt.
+Für $M_α := \{ x\in M: f(x) \le α\} \ne ∅$ ist $M_α$ auch abgeschlossen, da $f$ stetig und $M$ abgeschlossen ist.\\
+Da $f$ quasikonvex ist, ist $M_α$ konvex. es gilt
+\begin{lemma*}Für $X$ wie in Lemma \ref{2.12} gilt:
+Jede konvexe und abgeschlossene Menge ist schwach folgenabgeschlossen.\\
+(vgl. Übung oder \cite{altLinear}.)
+\end{lemma*}
+Dann folgt aus \ref{2.5}, dass $f$ \suhs{} ist.
+\end{proof}
+
+\begin{mydef}\label{2.13}
+Banachraum/Hilbertraum
+\end{mydef}
+\begin{bsp*}
+$\left( C([a,b]), \|	• \|_\infty \right)$ ist ein Banachraum aber $\left( C([a,b]), \|•\|_{L^2} \right)$ ist \emph{kein} Banachraum.
+\end{bsp*}
+
+
+\begin{mydef}\label{2.14}
+Sei $(X, \| 	• \|)$ ein reeller, normierter, linearer Raum. Die Menge aller linearen, stetigen Funktionen $f\colon X\to ℝ$ heißt der zu $X$ duale Raum. Er wird mit $\mathcal L(X, ℝ)$ oder $X^*$ bezeichnet. Die zugehörige Norm ist
+$$\| f\|_{X^*} = \sup_{\|x\|_X = 1} | f(x)|.$$
+\end{mydef}
+\begin{bem*}
+Wegen der Vollständigkeit der reellen Zahlen ist $X^*$ stets ein Banachraum.
+\end{bem*}
+
+\begin{bsp}\label{2.15}
+Sei $(X, \|•\|) = \left( C([0,1]), \|•\|_∞ \right)$. Dann gilt für $f\in X^*$ mit $f(x) = x \left( \frac{1}{2} \right)$, dass
+\begin{itemize}
+\item $f\colon X \to ℝ$ linear,
+\item $$|f(x)| = \left| x\left( \frac{1}{2} \right)\right|\le \max_{t\in [0,1]} |x(t)| = 1\cdot \| x \|_∞.$$
+Also $\| f\|_{X^*} \le 1.$
+Für $x(t) \equiv 1$ gilt $|f(x)| = \left| x\left( \frac{1}{2}\right) \right| = 1 = \| x\|_∞$, also $\|f\|_{X^*} \ge 1$, also $\| f\|_{X^*} = 1$ und $f$ ist stetig und $f\in X^*$. 
+\end{itemize}
+\end{bsp}
+
+Sei $X$ ein reeller Banachraum mit Dualraum $X^*$. Ist $x\in X$ ein fest gewähltes Element und wird $f\in X^*$ als variabel Betrachtet, so ist die durch 
+$$F_x\colon X^* \to ℝ, \; F_x(f) = f(x)\in ℝ$$
+definierte Abbildung linear und stetig, wegen
+$$|F_x(f)| = |f(x)|\le \| f\|_{X^*} \| x\|_X,$$
+und daher $F_x\in \left( X^* \right)^* =: X^{**}.$
+Der Raum $X^{**}$ heißt Bidualraum zu $X$. Mit der Zuordnung $x\to F_x$ als kanonische Einbettung gilt immer $X\subset X^{**}.$
+
+\begin{mydef}
+Sei $(X, \| • \|)$ ein reeller, normierter, linearer Raum und $X^*$ der zugehörige Dualraum und $X^*$ der zugehörige Dualraum. Ist die kanonische Einbettung $X \to X^{**}, x\mapsto F_x$ surjektiv, d.h. $X=X^{**}$, so heißt $X$ reflexiv.
+\end{mydef}
+D.h. bei einem reflexiven Banachraum erhält man bei zweimaliger Dualisierung wieder den ursprünglichen Raum.
+
+\begin{mydef}\label{2.17}
+Sei $Ω\subset ℝ^n, n\in ℕ$ eine beschränkte, Lebesgue-messbare Menge und $1\le p < ∞$. Dann definiert man
+$$L^p(Ω) = \left\{ y:Ω\to ℝ: \int_Ω |y(t)|^p~dt < ∞ \right\}$$
+mit 
+$$\| y\|_{L^p} = \left( \int_Ω |y(t)|^p ~dt \right)^{\frac{1}{p}}.$$
+$L^p(Ω)$ ist ein reeller, normierter, linearer Raum.
+\end{mydef}
+
+\begin{mydef}\label{2.18}
+Sei $Ω \subset ℝ^n$ wie in Definition \ref{2.17}. Dann definiert man
+$$L^∞(Ω) := \left\{ y\colon Ω\to ℝ :\text{ $y$ ist fast überall gleichmäßig beschränkt und messbar}\right\}.$$
+Mit
+$$\| y\|_{L^∞} = \esssup_{x\in Ω} |y(x)| := \inf_{|E|=0} \left( \sup_{x\in Ω\setminus E} |y(x)| \right)$$
+wird $L^∞(Ω)$ zu einem reellen, normierten, linearen Raum.
+\end{mydef}
+\end{document}
