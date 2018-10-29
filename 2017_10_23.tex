@@ -36,7 +36,7 @@ Es sei $X$ ein reeller Vektorraum und $M\subseteq X$.
 Die Menge $M$ heißt konvex, wenn für $x,y\in M$ und $λ\in [0,1]$ gilt
 $$λx + (1-λ) y \in M\qquad ∀λ\in [0,1].$$
 % standardskizze: konvexe Menge und nicht-konvexe Menge
-Sei $M\ne ∅$ und konvex. Dann heißt eine Funktion $f\colon M\to ℝ$ heißt konvex wenn
+Sei $M\ne ∅$ und konvex. Dann heißt eine Funktion $f\colon M\to ℝ$ konvex, wenn
 $$f(λx + (1-λ)y)) \le λf(x) + (1-λ) f(y) \qquad ∀ x,y\in M, ∀λ\in [0,1].$$
 % standardskizze: konvexe Funktion.
 \end{mydef}
@@ -131,7 +131,7 @@ Dann folgt aus \ref{2.5}, dass $f$ \suhs{} ist.
 Banachraum/Hilbertraum
 \end{mydef}
 \begin{bsp*}
-$\left( C([a,b]), \|	• \|_\infty \right)$ ist ein Banachraum aber $\left( C([a,b]), \|•\|_{L^2} \right)$ ist \emph{kein} Banachraum.
+$\left( C([a,b]), \|	• \|_\infty \right)$ ist ein Banachraum, aber $\left( C([a,b]), \|•\|_{L^2} \right)$ ist \emph{kein} Banachraum.
 \end{bsp*}
 
 
@@ -153,7 +153,7 @@ Für $x(t) \equiv 1$ gilt $|f(x)| = \left| x\left( \frac{1}{2}\right) \right| = 
 \end{itemize}
 \end{bsp}
 
-Sei $X$ ein reeller Banachraum mit Dualraum $X^*$. Ist $x\in X$ ein fest gewähltes Element und wird $f\in X^*$ als variabel Betrachtet, so ist die durch 
+Sei $X$ ein reeller Banachraum mit Dualraum $X^*$. Ist $x\in X$ ein fest gewähltes Element und wird $f\in X^*$ als variabel betrachtet, so ist die durch 
 $$F_x\colon X^* \to ℝ, \; F_x(f) = f(x)\in ℝ$$
 definierte Abbildung linear und stetig, wegen
 $$|F_x(f)| = |f(x)|\le \| f\|_{X^*} \| x\|_X,$$
