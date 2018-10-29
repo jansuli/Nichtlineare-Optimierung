@@ -1,0 +1,179 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+\begin{abstract}
+    In dieser Vorlesung wird nichtlineare Optimierung in unendlich-dimensionalen Räumen (im Funktionenraum) untersucht. Dabei werden auch allgemeine Optimalitätsbedingungen hergeleitet.
+\end{abstract}
+
+\chapter{Einleitung}
+Wir betrachten hier Probleme der Form:
+
+Sei $(X, \|.\|)$ ein reeller, normierter Vektorraum, $M\subset X$ nichtleer und $f\colon M\to ℝ$. Gesucht ist $x^*\in M$ mit \begin{itemize}
+    \item $f(x^*)\le f(x)$ für alle $x\in M$, wenn ein globales Minimum gesucht ist, 
+    \item und $f(x^*)\le f(x)$ für alle $x\in M\cap U_ε(x^*)$, falls ein lokales Minimum gesucht ist.
+\end{itemize}
+Je nach Ausprägung von $X,M$ und $f$ unterscheidet man
+\begin{itemize}
+    \item unendlich-dimensionale Optimierung, wenn $X$ ein Funktionenraum ist, z.B. $X = C([0,T])$.
+    \item endlich-dimensionale Optimierung, wenn $X = ℝ^n$ ist.
+    \item kontinuierliche Optimierung, wenn $\inner (M) = \mathring{M} \ne \emptyset.$
+    \item diskrete Optimierung, wenn $M\subset ℤ^n$.
+\end{itemize}
+Wir fokussieren uns auf unendliche-dimensionale und kontinuierliche Optimierung.
+
+\begin{bsp}\label{1.1}[Konstruktion eines Balkens]
+Betrachte einen rechteckigen Balken der Länge $l$, Höhe $x_1$ und Breite $x_2$. Das Volumen des Balken soll minimiert werden. Allerdings darf die Spannung im Balken nicht größer als ein vorgegebener Wert sein. Dafür muss gelten
+$$1000 \le x_1^2 x_2.$$
+Außerdem soll durch
+$$x_1 \le 3x_2, \quad x_2 \le x_1$$
+eine bestimmte Geometrie des Balken gesichert werden. Zusätzlich soll
+$$50 \le x_1 \ge 0, \quad x_2 \ge 0.$$
+D.h. wir haben
+\begin{align*}
+    X &= ℝ^2\\
+    M &:= \{ x\in ℝ^2: 1000\le x_1^2 x_2 , x_1 \le 3 x_2, x_2 \le x_1, 50 \ge x_1 \ge 0, x_2 \ge 0\}\\
+    f&\colon ℝ^2 \to ℝ, \quad x \mapsto lx_1x_2
+\end{align*}
+und somit eine endlich-dimensionale, kontinuierliche Optimierungsaufgabe.
+\end{bsp}
+
+\begin{bsp}\label{1.2}[Brachistochrone Problem]
+Dieses Problem wurde 1696 von Johann Bernoulli untersucht. Gegeben sind dabei zwei Punkte $x_a$ und $x_e$. Welches ist die Kurve, welche die Punkte $x_a$ und $x_e$ verbindet, so dass eine Kugel, die nur durch Schwerkraft bewegt wird, den Punkt $x_e$ in minimaler Zeit erreicht?
+%\begin{center}
+%\includegraphics[0.4\textwidth]{imgs\Brachistochrone}
+%\end{center}
+
+Das Problem lässt sich wie folgt mathematisch formulieren:
+Es seien $t_a,t_e \in ℝ, t_e > t_a$ und $\mathcal L\colon (t_a, t_e) \times G \to ℝ$ mit $G \subset ℝ^n \times ℝ^n$, wobei $\mathcal L$ in allen Komponenten zweimal stetig differenzierbar ist. Es sei
+\begin{align*}
+    X&= \{ x: [t_a, t_e]\to ℝ^n, \text{$x$ zweimal stetig differenzierbar} \}\\
+    M &= \{x\in X: x(t_a) = x_a, x(t_e) = x_e \}.
+\end{align*}
+Gesucht ist dann ein $x\in M$ mit
+$$l(x) = \min_{x\in M} \int_{t_a}^{t_e} \mathcal L(t, x(t), \dot x(t) )~dt.$$
+Es liegt also ein unendlich-dimensionales Optimierungsproblem vor.
+\end{bsp}
+
+\begin{bsp}\label{1.3}[Optimale Steuerung]
+Sei $I = [0,1], X= C([0,1])$ und $x\in X$ ein Zustand.
+Betrachtet wird
+$$\min_{x,u} f(x,u)$$
+mit 
+$$f(x,u) = \frac{1}{2}\int_0^1 \left( x(t) \right)^2 + \left( u(t) \right)^2~dt = \frac{1}{2} \left( \|x\|_{L^2}^2 + \| u \|_{L^2}^2 \right),$$
+so dass die Zustandsgleichung
+\begin{align*}
+    \dot x(t) &= \frac{1}{2} x(t) + u(t) \\
+    x(0) &= 1
+\end{align*}
+erfüllt ist. Man kann zeigen:\\
+Zu jedem vernünftigen $u$ existiert genau ein $x$, welches die Zustandsgleichung erfüllt, d.h. es gilt
+\begin{align*}
+    x &= x(x) \\
+    S(x) &= x & \text{Kontroll-Zustands-Operator}.
+\end{align*}
+$\min_{x,u} f(x,u)$ ist äquivalent zu $\min_{u} \tilde f(x)$ mit $\tilde f(x) = f(x(u), u)$. Diese Variante nennt man reduzierte Formulierung. Das ist immer noch ein unendlich-dimensionales Optimierungsproblem.
+\end{bsp}
+
+\begin{bsp}\label{1.4}
+Die hyperbolische Sinus-Funktion $\sinh$ soll auf dem Intervall $[0,2]$ durch eine lineare Funktion $a+bt$ approximiert werden (vgl. Abb. \ref{fig:1.4}). Wie misst man die Approximationsgüte?\\
+\begin{figure}[h!]\label{fig:1.4}
+    \centering
+    \subfile{imgs/bsp14.tex}
+    \caption{Lineare Approximation von $\sinh$.}
+\end{figure}
+Man kann z.B. für $a=0$ die Maximumsnorm wählen
+\begin{enumerate}[label=\alph*)]
+    \item $$\min_{ b\in ℝ}\max_{t\in [0,2]} | bt - \sinh(t) |.$$
+    Das ist ein min-max-Problem und man benötigt Bileveloptimierung.
+    Äquivalent dazu ist:
+    \item \begin{align*}
+        &\min_{b, λ\in ℝ} λ&\text{s.t.}\\
+        &λ = \max_{t\in [0,2]} |bt - \sinh(t) |
+        \end{align*}
+    Dann hat man ein Minimierungsproblem mit Nebenbedingung, welche eine spezielle Struktur hat. Ebenfalls äquivalent ist:
+    \item 
+    \begin{align*}
+        &\min_{b,λ\in ℝ}λ&\text{s.t.}\\
+        &\left. \begin{aligned}
+        βt - \sinh (t) &\le λ \\
+        βt - \sinh(t) &\ge -λ
+        \end{aligned}\; \right\} &\text{für alle $t \in [0,2]$}. 
+    \end{align*}
+    Dieses Problem hat unendlich viele Nebenbedingungen!
+\end{enumerate}
+\end{bsp}
+
+\begin{bem*}
+Im $ℝ^n$ haben wir als Standardnorm die Euklidische Norm
+$$\|x\| = \left( \sum x_i^2 \right)^{\frac{1}{2}}$$
+und alle Normen sind äquivalent. Das ist im Unendlichdimensionalen \emph{nicht} der Fall! Daher spielt die Wahl der Standardnorm hier eine wichtige Rolle und man muss den Einfluss untersuchen, welchen die Wahl der Norm auf die Optimierung hat.
+\end{bem*}
+
+\begin{bsp}\label{1.5}
+Seien $a,b \in ℝ$.
+\begin{itemize}
+    \item Die Menge $C([a,b])$ mit Maximumsnorm
+$$\| x\|_{\infty} = \max_{t\in [a,b]} |x(t)|$$
+ist ein linearer, normierter Raum. Dieser Raum ist abgeschlossen.
+    \item Die Menge $C([a,b])$ mit der $L^2$-Norm
+    $$\| x \| = \left( \int_a^b \left( x(t) \right)^2 ~dt \right)^{\frac{1}{2}}$$
+    ist ein normierter Raum, aber \emph{nicht} abgeschlossen! \\
+    Denn: Seien $a=0,b=2$ und $x_n(t) = \min\{1, t^n\}$. Dann gilt
+    \begin{align*}
+        \| x_n(t) - x_m (t) \|^2_{L^2} &= \int_0^2 \left( x_n(t) - x_m(t) \right)^2~dt \\
+        &= \int_0^1 \left( t^n - t^m \right)^2~dt \\
+        &= \int_0^1 t^{2n} - 2t^{n+1} + t^{2m}~dt \\
+        &= \frac{1}{2n+1} - \frac{2}{n+m+1} + \frac{1}{2m+1} \\
+        &\le \frac{2}{2m+1}&\text{für $m\le n$.}
+    \end{align*}
+    Das heißt $(x_n)$ ist eine Cauchy-Folge. Für den Grenzwert gilt
+    $$
+    x(t) = \lim_{n\to \infty} x_n(t) = \begin{cases}
+    0&0\le t < 1,\\
+    1 & 1\le t \le 2,\end{cases}
+    $$
+    also $x\notin C( [0,2])$.
+\end{itemize}
+Dieses Beispiel verdeutigt, dass viele Aussagen von der gewählten Norm abhängen.
+\end{bsp}
+
+\begin{bsp}\label{1.6}[Strömung in einem Becken]
+
+\begin{figure}[h!]
+    \centering{\subfile{imgs/bsp16.tex}}
+\end{figure}
+
+Wir betrachten den Zusammenhang zwischen unendlich-dimensionaler Formulierung und endliche-dimenisonaler Diskretisierung.
+Dazu sei ein Wasser-Becken betrachtet, so dass das Wasser an der Oberfläche und am Beckenboden angetrieben werden kann. als mathematische Formulierung ergibt sich
+\begin{align*}
+    \min J(y,u) &:= \min \frac{1}{2} \int |y_2( 0.4, x_2 )|^2 ~dx_2 + \frac{γ}{2} \| u \|_{L^2}\\
+    y &= (y_1, y_2) ~\text{gibt die Geschwindigkeit in $x_1$- bzw. $x_2$-Richtung, \emph{Zustand}}\\
+    u &=\text{Kontrolle} 
+\end{align*}
+Der erste Term der Zielfunktion minimiert die Geschwindigkeit in horizontale Richtung. Der zweite Term minimiert die Kosten für die Kontrolle.\\
+$y$ erfüllt die Navier-Stokes-Gleichungen
+\begin{align*}
+    &\frac{-1}{R_e} \Delta y + (y\cdot \nabla) y + \nabla p = f &\text{in $Ω=[0,1]^2$}\\
+    &\dive y = 0&\text{in $Ω$},\\
+    &y = b&\text{auf $Γ_u$},\\
+    &y = u&\text{auf $Γ_o$},\\
+    &y = 0&\text{auf $Γ\setminus \{ Γ_u \cup Γ_o \}$}
+\end{align*}
+und löst ein Optimierungsproblem mit partiellen Differentialgleichungen.
+Als passende Räume wähle $y\in H_0^1(Ω)$ für den Zustand und $u\in L^2(Ω)$ bzw. $u\in L^2(Γ_0)$ für die Kontrolle
+
+Hinsichtlich der \bemph{Optimierung} untersuchen wir eine unendlich-dimensionale Formulierung im Funktionenraum versus einer endlich-dimensionalen Formulierung, also einer partiellen Differentialgleichung mit diskretisierter Kontrolle $u$.\\
+Warum tauchen Probleme auf? 
+In der unendlich-dimensionalen Formulierung
+$$umin J(y,u) = \min J(y(u), u) = \min \tilde J(u)$$
+mit $\tilde J(u)$ ausgewertet auf $Γ_0$, $u\in L^2(Γ_0)$ oder sogare $u\in H_0^1(Γ_0) := U$
+hat man ein inneres Produkt $\langle •,• \rangle_U$ und eine dadurch induzierte Norm.
+
+In der endich-dimensionalen Formulierung mit diskretisierter Kontrolle $u_h \in ℝ^{n+1}$ nutzt man das übliche Standard-Skalarprodukt und die dadurch induzierte Euklidische Norm im diskretisierten Problem
+$$\min_{u_h\in ℝ^{n+1} }\tilde J_h (u_h).$$
+Will man eine zu $U$ passende Diskretisierung $U_h$ wählen, ergibt sich als Problem die Wahl der Matrix $T$ in der Überführung der Skalarprodukte
+$$\langle u_h, v_h \rangle_{ℝ^n} = u_h^T v_h \stackrel{?}= u_h^T T v_h = \langle u_h, v_h \rangle_{U_h}.$$
+In der Regel gilt $T\ne I$! D.h. in der Diskretisierung ist das passende Skalarprodukt wichtig! Einen ähnlichen Effekt beobachtet man auch in der Aerodynamik. \\
+Naive Optimierung umgeht man hier mit \bemph{„Hessian Smoothing“}.
+\end{bsp}
+\end{document}

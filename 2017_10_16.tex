@@ -1,0 +1,126 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\setcounter{chapter}{1}
+\chapter{Existenz von Lösungen}
+Für ein gegebenes Optimierungsproblem ist im Allgemeinen nicht klar, ob überhaupt Lösungen existieren. Zum Beispiel ist
+\begin{align*}
+    &\min_{x\in X} f(x) = \min_{x\in X} \exp(-2x^3),\\
+    &X = M = ℝ
+\end{align*}
+nicht lösbar. Daher benötigt man Kriterien für $f$ und $M$, welche die EXistenz von Lösungen sichern.
+
+\section{Existenzaussagen}
+\begin{satz*}[Satz von Weierstraß]
+Jede stetige Funktion $f:ℝ^n \to ℝ$ nimmt auf einer kompakten Teilmenge ein Minimum an.
+\end{satz*}
+Dieser Satz gilt \bemph{nicht} im Unendlichdimensionalen. In diesem Fall nehmen wir zunächst an, $f$ ist stetig und $M$ kompakt. Ferner werden weitere Definitionen benötigt.
+
+\begin{mydef}\label{2.1}
+Sei $(X, \|•\|)$ ein reeller, normierter, linearer Raum und $M\subset X$ mit $M\ne ∅$ sowie $f\colon M\to ℝ$.
+\begin{itemize}
+    \item Die Menge aller stetigen, linearen Funktionen $f\colon X\to ℝ$ wird mit $\lin (X, ℝ)$ bezeichnet.
+    \item Eine Folge $\{ x_k \}_{k\in ℕ}, x_k \in M$ heißt \bemph{schwach konvergent}, wenn ein $\overline x$ existiert, so dass
+    $$f(x_k) \to f(\overline x) \qquad ∀f\in \lin(X, ℝ).$$
+    Man schreibt $x_k \wto \overline x,k\to \infty$.
+    \item Die Menge $M$ heißt \bemph{schwach folgenabgeschlossen}, wenn aus $x_k \in M, x_k \wto \overline x , k\to \infty$ folgt, dass $\overline x\in M$.
+    \item Die Menge $M$ heißt \bemph{schwach folgenkompakt}, wenn $M$ schwach folgenabgeschlossen ist und man aus jeder Folge $\{x_k\}\subset M$ eine in $X$ schwach konvergente Teilfolge auswählen kann.
+    \item Die Funktion $f\colon M\to ℝ$ heißt \bemph{schwach unterhalb-stetig}, wenn für jede Folge $\{ x_k \}\subset M$ mit $x_k \wto \overline x\in M$ gilt
+    $$\liminf_{k\to \infty} f(x_k) \ge f(\overline x).$$
+\end{itemize}
+\end{mydef}
+
+\begin{bsp}\label{2.2}$ $\\[-1em]
+\begin{itemize}
+    \item Sei $X = l^p(ℝ) = \{ \{x_k \}\subset ℝ: \sum_{i=0}^\infty |x_k|^p < \infty \}$ mit $1<p<\infty$ und $\{e_j\}_{j\in ℕ}$ mit $e_{j,i} = δ_{j,i}$. Ist $φ\in \lin(X, ℝ)$, so existiert eine Folge $a = \{a_i\} \in l^q( ℝ)$ mit $\frac{1}{p} + \frac{1}{q} = 1$, so dass
+$$φ(x) = \sum_{i=0}^\infty a_i x_i \qquad ∀x\in l^p(ℝ).$$
+Also $φ(e_j) = a_j \to 0$ und daraus folgt $e_j \wto 0$, während aber $\| e_j \| = 1$ bleibt, also $e_j\not \to 0$.
+
+\item Die Funktion $f\colon ℝ\to ℝ$ mit 
+$$f(x) =\begin{cases}
+-1 &\text{für $x\in ℕ$},\\
+1&\text{sonst.}
+\end{cases}$$
+ist schwach unterhalb-stetig, aber nicht stetig.
+\end{itemize}
+\end{bsp}
+
+\begin{folge*}
+$ $\\[-1em]
+\begin{itemize}
+    \item Im $ℝ^n$ entspricht die schwache Konvergenz der starken Konvergenz, d.h.
+    $$x_k \wto \ov x ⇔ x_k \to \ov x.$$
+    \item Es gibt schwach konvergente Folgen mit dem schwachen Grenzwert $0$, deren Elemente alle die Norm $1$ haben.\\
+    Dies zeigt, wie schwach dieser Konvergenzbegriff ist. Deswegen spielt er bei der Entwicklung von Algorithmen keine Rolle, aber bei deren Analyse.
+    Ein typisches Resultat ist z.B. „… dann existiert eine schwach konvergente Teilfolge, deren schwacher Grenzwert stationär ist.“
+    Außerdem nutzt man ihn bei Existenzaussagen.
+\end{itemize}
+\end{folge*}
+\begin{satz}[Verallgemeinerung von Weierstaß]\label{2.3}
+Sei $(X, \| • \|)$ ein reeller, normierter, linearer Raum, $M\subset M, M\ne ∅$ und $f\colon M\to ℝ$. Ist die Menge $M$ schwach folgenkompakt und $f$ schwach unterhalb stetig, so existiert mindestens ein $\ov x \in M$ mit
+$$f(\ov x) \le f(x) \qquad ∀x\in M.$$
+D.h. das Optimierungsproblem besitzt mindestens eine Lösung.
+\end{satz}
+
+\begin{proof}
+Sei $\{x_k\}\subset M$ so, dass
+$$\lim_{k\to \infty} f(x_k) = \inf_{x\in M} f(x).$$
+Da $M$ schwach folgenkompakt ist, existiert eine Teilfolge $\{x_{k_l}\}$ mit $x_{k_l}\wto \ov x\in M, l\to \infty$. Da $f$ schwach unterhalb stetig ist, gilt
+$$f(\ov x) \le \liminf_{l\to \infty} f(x_{k_l}) = \inf_{x\in M} f(x),$$
+also $f(\ov x) = \min_{x\in M} f(x)$.
+\end{proof}
+
+\begin{folge}
+Damit erhält man auch die Beschränktheit von $f$ nach unten.
+\end{folge}
+Der Nachweis der oben definierten Eigenschaften ist allerdings oftmals schwierig. Also betrachten wir noch andere Konzepte, die einfacher nachzuweisen sind!
+
+\begin{mydef}\label{2.4}
+Sei $(X, \|•\|)$ wieder ein reeller, normierter Raum, $M\subset X, M\ne ∅$ und $f\colon M\to ℝ$. Die Menge 
+$$E(f) \le \{(x,α) \in M \times ℝ : f(x)\le α \}$$
+heißt Epigraph von $f$.
+\end{mydef}
+
+% skizze 1D epigraph
+
+\begin{satz}\label{2.5}
+Sei $(X, \|•\|)$ wieder ein reeller, normierter Raum, $M\subset X, M\ne ∅$ und $f\colon M\to ℝ$. Sei $M$ schwach folgenabgeschlossen. Dann sind folgende Aussagen äquivalent:
+\begin{enumerate}[label=\roman*)]
+    \item \label{2.5.1} $f$ ist schwach unterhalb stetig.
+    \item \label{2.5.2} $E(f)$ ist schwach folgenabgeschlossen.
+    \item \label{2.5.3} Ist für ein $α\in ℝ$ die Menge
+    $$M_α = \{ x\in M: f(x)\le α \}$$
+    nicht leer, so ist $M_α$ schwach folgenabgeschlossen.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+Es gelte \ref{2.5.1}. Wir folgern \ref{2.5.2}. Sei also $f$ schwach unterhalb stetig. Sei $\{ (x_k, α_k) \}_{k\in ℕ}$ eine schwach konvergente Folge in $E(f)$ mit dem Grenzwert $(\ov x, \ov α) \in X \times ℝ$. Also 
+\begin{align*}
+    &x_k \wto \ov x &\text{in $X$}\\
+    &α_k \wto \ov α ⇔ a_k \to \ov α &\text{in $ℝ$}.
+\end{align*}
+Da $M$ schwach folgenabgeschlossen ist, ist $\ov x \in M$.
+Sei nun $ε>0$ beliebig. Dann existiert ein $n_0\in ℕ$ mit
+$$f(x_k) \le α_k < \ov α + ε \qquad ∀n\ge n_0.$$
+Da $f$ schwach unterhalb-stetig ist, folgt
+$$f(\ov x) \le \liminf_{k\to \infty} f(x_k) < \ov α + ε.$$
+Für $ε \searrow 0$ erhält man
+$$f(\ov x) \le \ov α \Rightarrow (\ov x, \ov α) \in E(f).$$
+
+Nun gelte \ref{2.5.2}. Dann folgt \ref{2.5.3}. Sei dazu $α\in ℝ$, so dass $M_α \ne ∅$. Da $M$ schwach folgenabgeschlossen ist, ist auch $M\times \{ α \}$ \sfa und so gilt dies auch für 
+$$M_α \times \{ α \} = E(f) \cap \{ M \times \{ α \} \}.$$
+Damit ist $M_α$ \sfa.
+
+Es gelte schließlich \ref{2.5.3}. Für einen Widerspruch nehmen wir an, dass für $α\in ℝ$ die Niveaumenge $M_α$ \sfa ist, wenn $M_α\ne ∅$ ist, aber $f$ nicht \suhs ist.
+Dann gibt es eine Folge $\{ x_k \}_{k\in ℕ} \subset M$ mit $x_k \wto \ov x$, aber
+$$\liminf_{k\to \infty} f(x_k) < f(\ov x).$$
+Sei $α\in ℝ$ so, dass
+$$\liminf_{k\to \infty} f(x_k) < α < f(\ov x).$$
+Dann existiert eine Teilfolge $\{x_{k_l}\}\subset M_α$, die schwach gegen ein $\ov x \in M_α$ konvergiert. Also
+$f(\ov x ) \le α$.
+\end{proof}
+
+\begin{bem*}
+Die Menge $M_α$ heißt auch Levelset oder Niveaumenge.
+\end{bem*}
+\end{document}

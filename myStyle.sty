@@ -1,0 +1,74 @@
+\ProvidesPackage{myStyle}
+
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{geometry} % used for fancy page settings
+\usepackage{amsthm}  % used for "theorem style"
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage[square, numbers]{natbib}
+\usepackage{subfiles}
+\usepackage{unicode-math}
+\usepackage{cancel}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titling}
+\usepackage{pgf, tikz, pgfplots}
+\pgfplotsset{compat=newest}
+
+\usetikzlibrary{patterns}
+%\usetikzlibrary{fit,shapes,graphs,graphs.standard}
+
+\geometry{a4paper,left=2cm, top=2cm, bottom=2cm, right=2cm}
+
+\geometry{a4paper,left=2cm, top=2cm, bottom=2cm, right=2cm}
+\setmainfont{Merriweather-Regular.ttf}[Path=./fonts/, BoldFont = Merriweather-Bold.ttf , ItalicFont = Merriweather-Italic.ttf, BoldItalicFont = Merriweather-BoldItalic.ttf ]
+\setmathfont{texgyredejavu-math.otf}[Path = ./fonts/]
+%\setmathfont[range=\setminus ,Scale=MatchLowercase, Path=fonts/]{xits-math.otf}
+\setmathrm{texgyredejavu-math.otf}[Scale=MatchLowercase, Path = ./fonts/]
+
+%\DeclareMathSizes{10.5}{11}{9}{9}
+
+
+\newtheorem{satz}{Satz}[chapter]
+\newtheorem*{satz*}{Satz}
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{korollar}[satz]{Korollar}
+\newtheorem{folge}[satz]{Folgerung}
+\newtheorem*{folge*}{Folgerung}
+\theoremstyle{definition}
+\newtheorem{mydef}[satz]{Definition}
+\newtheorem*{mydef*}{Definition}
+\newtheorem{bem}[satz]{Bemerkung}
+\newtheorem*{bem*}{Bemerkung}
+\newtheorem*{not*}{Notation}
+\newtheorem{ann}[satz]{Annahme}
+\newtheorem{bsp}[satz]{Beispiel}
+\newtheorem*{bsp*}{Beispiel}
+\newtheorem*{er}{Erinnerung}
+
+
+\titleformat{\chapter}[hang]{\Huge\bfseries\normalfont\sffamily}{\thechapter ~|}{7pt}{\Huge\bfseries\sffamily}
+
+\definecolor{subsectionblue}{HTML}{2052a3}
+\definecolor{sectionblue}{HTML}{0040a8}
+\definecolor{subsubsectionblue}{HTML}{3a62a3}
+\titleformat{\section}
+  {\normalfont\sffamily\LARGE\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+  
+\titleformat{\subsection}
+  {\normalfont\sffamily\Large\bfseries\color{subsectionblue}}
+  {\thesubsection}{1em}{}
+    
+\titleformat{\subsubsection}
+  {\normalfont\sffamily\bfseries\color{subsubsectionblue}}
+  {\thesubsection}{1em}{}
+
+\setlength{\parindent}{1em}
+\setlist[enumerate,1]{label=(\arabic*), ref=(\arabic{chapter}.\arabic{satz})(\arabic*)}
+
+%\mathcode `l=\ell

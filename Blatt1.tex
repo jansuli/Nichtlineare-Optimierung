@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{myStyle}
+\usepackage{commands}
+
+\begin{document}
+
+\section{Operatornorm}
+Für einen Operator $A \colon V \to W$ für zwei normierte Räume $V$ und $W$ ist die Operatornorm definiert durch
+$$\| A \|:= \sup_{\| u \|_V = 1} \| A u \|_W.$$
+Wir betrachten $V = W = C([0,1])$ mit
+$$\|u \|_{C([0,1])} = \| u \|_\infty = \sup_{t\in [0,1]} |u(t)|.$$
+Sei $u \in C([0,1])$ mit $\| u \|_\infty = 1$. Es gilt
+\begin{align*}
+    |\left(Au\right)(t)| & \le \int_0^1 |e^{t-s} u(s) |~ds\\
+    &= \int_0^1 e^{t-s} |u(s)| ~ds \\
+    &\stackrel{t\in [0,1]}\le \underbrace{\|u\|_\infty}_{=1} \int_0^1 e^{1-s}~ds \\
+    &= e\int_0^1 e^{-s}~ds = e-1 
+\end{align*}
+Für die konstante Funktion $u \equiv 1$ gilt Gleichheit, denn dann ist
+$$\| Au \|_\infty = \sup_{t\in [0,1]} \int_0^1 e^{t-s}~ds = e-1$$
+und somit folgt auch
+$$\| A \| = e-1.$$
+
+\section{Stetiger Operator}
+Es gilt
+\begin{align*}\| Tx \|_2 &= \left| \sum_{i=1}^\infty \frac{ξ_i}{i} \right| \le \sum_{i=1}^\infty \left| \frac{ξ_i}{i}\right| \\
+&\stackrel{\text{Hölder}}\le \left\| \left( \frac{1}{i} \right)_{i\in ℕ} \right\|_2 \cdot \|x \|_2
+\end{align*}
+Daraus folgt $\| T \|<\infty$.
+Einsetzen der gegebenen Folge gilt
+$$\|Tx_1 \|_\infty = \sum_{i=1}^n \frac{1}{i}\to \infty\quad \text{für $n\to \infty$}$$
+und also in dieser Norm $\| T \|_{infty} = \infty$.
+
+\setcounter{section}{2}
+\section{schwach konvergent impliziert stark konvergent}
+Sei $H$ ein Hilbertraum mit Skalarprodukt $\langle •,•\rangle$. Sei $u_n$ eine stark konvergente Folge, also $\|u_n - u\|_H \to 0$ für $n\to \infty$. Für $φ\in H^*$ gilt dann
+$$|φ(u_n) - φ(u) | = |φ(u_n - u)| \le \| φ \|_{H^*} \|u_n - u \|_H \to 0,$$
+also 
+$$\lim_{n\to \infty} φ(u_n) = φ(u).$$
+
+\section{Konvergenzbegriffe}
+Es sei $H$ ein Hilbertraum mit Skalarprodukt $\langle •,•\rangle$. 
+Es konvergiere die Folge $u_n$ schwach gegen $u$, also
+$$u_n \wto u :⇔ \lim_{n\to \infty} φ(u_n) = φ(u) \quad ∀φ\in H^*$$
+Mit dem Rieszschen Darstellungssatz gibt es für jedes $φ\in H^*$ genau ein $w\in H$, so dass 
+$$φ(u_n) = \langle u_n, w \rangle\qquad ∀u_n \in H,$$
+also erhalten wir
+$$u_n \wto u ⇔ \lim_{n\to \infty} \langle u_n, w \rangle = \langle u, w \rangle \quad ∀w\in H.$$
+Dann gilt außerdem
+$$\lim \langle u_n -u, w \rangle = 0 \qquad ∀w\in H.$$
+Jede schwach konvergente Folge ist beschränkt, es gibt also ein $M\ge 0$, so dass
+$$\|u_n\|_H \le M\qquad ∀n\in ℕ.$$
+
+Ist ferner $v_n \to v$, gilt also
+$$\lim_{n\to \infty} \|v_n - v \|_H = 0,$$
+so folgt
+\begin{align*}
+    |\langle u_n, v_n \rangle - \langle u, v \rangle | &= | \langle u_n, v_n \rangle - \langle u_n, v \rangle + \langle u_n, v\rangle - \langle u, v\rangle |\\
+    &= |\langle u_n , v_n - v \rangle  -\langle u - u_n , v\rangle| \\
+    &\le |\langle u_n, v_n - v \rangle | + |\langle u - u_n, v \rangle |\\
+    &\stackrel{\text{C.S.}}\le \underbrace{\| u_n \|_H}_{\le M} \underbrace{\|v_n - v\|_H}_{\to 0} + \underbrace{| \langle u - u_n, v \rangle |}_{\to 0} \to 0 
+\end{align*}
+\end{document}

@@ -1,0 +1,76 @@
+\documentclass[../main.tex]{subfiles}
+
+
+\begin{document}
+% Pattern Info
+\tikzset{
+pattern size/.store in=\mcSize, 
+pattern size = 5pt,
+pattern thickness/.store in=\mcThickness, 
+pattern thickness = 0.3pt,
+pattern radius/.store in=\mcRadius, 
+pattern radius = 1pt}
+\makeatletter
+\pgfutil@ifundefined{pgf@pattern@name@_whc4pt2wr}{
+\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_whc4pt2wr}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{
+\pgfsetcolor{\tikz@pattern@color}
+\pgfsetlinewidth{\mcThickness}
+\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+\pgfusepath{stroke}
+}}
+\makeatother
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp22514555218653065] 
+\draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][pattern=_whc4pt2wr,pattern size=17.25pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 74; green, 144; blue, 226}] (240,80) -- (430,80) -- (430,200) -- (240,200) -- cycle ;
+%Straight Lines [id:da11594963838230554] 
+\draw    (140,80) -- (240,80) ;
+
+
+%Straight Lines [id:da9367075469804582] 
+\draw    (240,80) -- (240,200) ;
+
+
+%Straight Lines [id:da14697611819632117] 
+\draw    (240,200) -- (430,200) ;
+
+
+%Straight Lines [id:da19603112438068448] 
+\draw    (430,200) -- (430,80) ;
+
+
+%Straight Lines [id:da7540556725808911] 
+\draw    (430,80) -- (530,80) ;
+
+
+%Straight Lines [id:da4979461552559501] 
+\draw    (250,210) -- (418,210) ;
+\draw [shift={(420,210)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+%Straight Lines [id:da15482407024612033] 
+\draw    (250,70) -- (418,70) ;
+\draw [shift={(420,70)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+%Curve Lines [id:da05401744947626086] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=2.25]    (288.11,108.34) .. controls (314.29,80.82) and (375.5,92.83) .. (379,108.83) .. controls (382.5,124.83) and (339.17,128.21) .. (317.17,124.21) .. controls (295.17,120.21) and (293.84,114.65) .. (296.95,110.43) .. controls (300.06,106.21) and (313.45,98.67) .. (330.06,97.76) .. controls (346.67,96.85) and (368.9,102.69) .. (369.39,109.32) .. controls (369.89,115.94) and (354.45,118.25) .. (339.62,118.65) .. controls (324.78,119.06) and (302,115.83) .. (308.45,109.34) .. controls (314.89,102.85) and (349.79,101.58) .. (357.17,108.65) .. controls (364.56,115.72) and (320.78,113.67) .. (320.11,110.01) ;
+
+
+%Curve Lines [id:da057428449129677483] 
+\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=2.25]    (287.61,163.84) .. controls (307.39,188.73) and (381,181.33) .. (375.89,164.73) .. controls (370.78,148.12) and (336.89,148.73) .. (325.39,149.23) .. controls (313.89,149.73) and (299.89,152.23) .. (296.89,159.73) .. controls (293.89,167.23) and (325.39,173.23) .. (339.89,172.73) .. controls (354.39,172.23) and (367.89,170.73) .. (366.39,163.73) .. controls (364.89,156.73) and (313.89,154.73) .. (309.89,159.23) .. controls (305.89,163.73) and (323.89,165.73) .. (348.89,165.73) ;
+
+
+
+% Text Node
+\draw (330,230) node  [align=left] {Antrieb};
+
+
+\end{tikzpicture}
+\end{document}

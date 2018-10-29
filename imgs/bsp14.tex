@@ -1,0 +1,18 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[ xlabel={$t$}, ylabel={$f(t)$},
+    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+    every axis y label/.style={at={(current axis.north west)},above=2mm},
+	axis lines = middle,
+	samples = 30,
+	xtick = {1,2},
+	domain = 0:2.1,
+	legend pos = outer north east]
+\addplot+[no marks] {sinh(x)};
+\addlegendentry {$\sinh(x)$};
+\addplot+[no marks] {1.45*x};
+\addlegendentry {$a + bt$}
+\end{axis}
+\end{tikzpicture}
+\end{document}
