@@ -1,0 +1,167 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+\begin{bem*}$ $\\[-1em]
+\begin{itemize}
+    \item Die $\Lp$-Räume sind für $1\le p \le ∞$ vollständig mit der angegebenen Norm.
+    \item Für $M<p<∞$ sind die $\Lp$-Räume auch reflexiv, denn:
+    Jede Funktion $F\in \left( \Lp(Ω) \right)^*$ kann durch eine Funktion $f\in \Larg{q}(Ω)$ mittels der Form
+    $$F(x) = \int_Ω f(t) x(t) ~dt$$
+    dargestellt werden, wobei $1= \frac1p + \frac1q$.
+    Die Stetigkeit von $F$ folgt aus der Hölderschen Ungleichung
+    $$\int_Ω |f(t)| |x(t)| ~dt \le \left( \int_Ω |f(t)|^q ~dt \right)^{\frac1q} \cdot \left( \int_Ω |x(t)|^p ~dt \right)^{\frac{1}{p}}$$
+    und dem Rieszschen Darstellungssatz.
+    Also $\left( \Lp (Ω) \right)^* = L^q(Ω)$ und $\left( \Lp(Ω)\right)^{**} = \Lp(Ω)$.
+    \item Für $p=1$ gilt $\left( L^1(Ω)\right) = L^∞(Ω)$, aber
+    $$\left( L^∞(Ω) \right)^* \supsetneq L_1 (Ω).$$
+\end{itemize}
+\end{bem*}
+
+\begin{satz}\label{2.19}
+Sei $X$ ein reeller, reflexiver Banachraum und $M\subset X, M\ne ∅$ und $M$ konvex, abgeschlossen sowie beschränkt. Sei $f\colon M\to ℝ$ eine stetige, quasikonvexe Funktion. 
+Dann existiert mindestens ein $x\in M$ so, ass $f$ in $x$ minimal wird.
+\end{satz}
+
+\begin{proof}
+Es gilt: Jede nichtleere, konvexe, abgeschlossene und beschränkte Teilmenge eines reflexiven Banachraums ist schwach folgenkompakt (vgl. \cite{werner}). Dann folgt die Behauptung aus Satz \ref{2.3} mit Lemma \ref{2.12}.
+\end{proof}
+
+Eine wichtige Voraussetzung in diesem Satz ist die Stetigkeit von $f$. 
+Wir untersuchen deshalb, wann eine Funktion stetig ist. 
+Man kann zeigen:
+\begin{lemma}\label{2.20}
+Sei $(X, \|•\|)$ ein reeller, normierter Vektorraum. Sei $M\subset X, M\ne ∅, M$ offen und konvex.
+Ist $f\colon M\to ℝ$ konvex und stetig in einem $\overline{x}\in M$, dann ist $f$ stetig auf ganz $M$.
+\end{lemma}
+
+\begin{proof}
+Sei $\tilde x\in M$ beliebig. 
+Es gilt zu zeigen, dass $f$ stetig ist in $\tilde x$.
+
+Da $M$ offen und $f$ in $\ov x$ stetig ist, gibt es eine abgeschlossene Umgebung
+$$U_δ(\ov x) := \{ x\in M: \| x- \ov x\| \le δ \},$$
+so dass für $α\in ℝ$ gilt, dass 
+$$f(x) \le  α \qquad ∀x\in U_δ(\ov x).$$
+Da $M$ konvex und offen ist, existiert ein $λ>1$ mit 
+$$\ov x + λ(\tilde x - \ov x) \in M\text{ und } U_{(1-1/λ)δ}(\tilde x) \subset M.$$
+%skizze
+Für $x\in U_{(1-1/λ)δ}(\tilde x)$ gilt wegen der Konvexität von $f$, dass für ein $y\in U_δ(0_X)$ gilt:
+\begin{align*}
+    f(x) &= f(\tilde x + (1-λ^{-1}) y )\\
+    &= f\left(\tilde x - (1-λ^{-1})\ov x + (1-λ^{-1}) (\ov x + y) \right)\\
+    &= f \left( λ^{-1} \underbrace{\left( \ov x +λ(\tilde x - \ov x)  \right)}_{\in M} + (1-λ^{-1})\underbrace{(\ov x + y )}_{\in M} \right) \\
+    &\le λ^{-1} f\left( \ov x + λ(\tilde x - \ov x) \right) + (1-λ^{-1}) \underline{f(\ov x + y)}_{\le α}\\
+    &\le λ^{-1} f\left( \ov x + λ(\tilde x - \ov x) \right) + (1-λ^{-1})α = β.
+\end{align*}
+Es gilt also
+$$f(x) \le β \qquad ∀x\in U_{(1-λ^{-1})δ}(\tilde x).$$
+
+Sei nun $ε\in (0,1)$ und $x \in U_{(1-λ^{-1})δ}(\tilde x)$. Mit $y\in U_{(1-λ^{-1})δ}(0_X)$ und der Konvexität von $f$ folgt:
+\begin{align*}
+    f(x) &= f(\tilde x + εy) \\
+    &= f\left( (1-ε)\tilde x + ε(\tilde x + y) \right)\\
+    &\le (1-ε) f(\tilde x) + ε f( \tilde x + y ) \\
+    &\le (1-ε) f(\tilde x) + εβ
+\end{align*}
+und es folgt
+\begin{equation}
+\label{eqn:2.20.1}
+f(x) - f(\tilde x) \le ε( β - f(\tilde x) ).\tag{$\star$}
+\end{equation}
+
+Außerdem gilt
+\begin{align*}
+f(\tilde x ) &= f \left( \frac{1}{1+ε} (\tilde x + ε y) + \left( 1 - \frac{1}{1+ε}\right) (\tilde x + y) \right) \\
+&\le  \frac{1}{1+ε} f(\tilde x + εy) +  \left( 1 - \frac{1}{1+ε}\right) f(\tilde x + y)\\
+&\le \frac{1}{1+ε} f(\tilde x + εy) +  \left( 1 - \frac{1}{1+ε}\right)β\\
+&\le \frac{1}{1+ε} \left( f(x) + εβ \right),
+\end{align*}
+also
+\begin{align}
+    (1+ε) f(\tilde x) & \le f(x) + εβ,\nonumber \\ \Rightarrow\;
+    -\left( f(x) - f(\tilde x) \right) & \le ε(β-f(\tilde x))\label{eqn:2.20.2}\tag{$\star\star$}
+\end{align}
+und somit insgesamt aus \eqref{eqn:2.20.1} und \eqref{eqn:2.20.2}:
+$$\left| f(x) - f(\tilde x) \right| \le  ε ( β - f(\tilde x) ) \qquad ∀x\in U_{ε(1-λ^{-1})δ}(\tilde x),$$
+also die Stetigkeit von $f$ in $\tilde x$.
+\end{proof}
+Wir nutzen diese Existenzresultate in den Abschnitten \ref{section:2.3} und \ref{section:2.4}.
+
+\section{Menge von Lösungspunkten}\label{section:2.1}.
+\begin{satz}\label{2.21}
+Sei $X$ ein reeller Vektorraum und $M\subset X$ nichtleer und konvex. Dann ist für jede quasikonvexe Funktion $f\colon M\to ℝ$ die Menge der Minimalpunkte in $M$ konvex.
+\end{satz}
+\begin{proof}
+Beweis in Übung 4.
+\end{proof}
+
+Bislang haben wir globale Minimalpunkte betrachtet. 
+Jetzt beschäftigen wir uns mit lokalen Minimalpunkten.
+
+\begin{mydef}\label{2.22}
+Sei $(X, \|•\|)$ ein reeller, normierter, linearer Raum und $M\subset X$ nichtleer. 
+Ein $\ov x \in M$ heißt lokaler Minimalpunkt von $f$ in $M$, wenn eine Umgebung 
+$$U_ε(\ov x) = \{ x\in X: \| x- \ov x \| < ε \}$$
+existiert, so dass gilt
+$$f(\ov x) \le f(x) \qquad ∀ x\in U_ε(\ov x) \cap M.$$
+\end{mydef}
+\begin{bem*}
+$M$ wurde nicht als offen angenommen!
+\end{bem*}
+% skizze
+
+\begin{satz}\label{2.23}
+Sei $(X, \|•\|)$ ein reeller, linearer, normierter Raum und $M\subset X, M\ne ∅$ eine konvexe Menge. Dann ist jeder lokale Minimalpunkt $\ov x\in M$ einer konvexen Funktion $f\colon M\to ℝ$ auch ein globaler Minimalpunkt von $f$ auf $M$.
+\end{satz} 
+
+\begin{proof}
+Sei $\ov x\in M$ ein lokaler Minimalpunkt von $f$, dann existiert ein $ε>0$, so dass
+$$f(\ov x) \le f(x) \qquad ∀x\in M\cap U_{ε}(\ov x).$$
+Sei $x \in M, x\notin U_{ε}(\ov x)$, dann gilt
+$$\| x - \ov x \| > ε\;\text{ und }\; λ := \frac12 \frac{ε}{\| x - \ov x \|}\in (0,1).$$
+Damit folgt
+\begin{align*}
+    x_λ &= λx + (1-λ)\ov x \in M\\
+    \| x_λ - \ov x \| &= \| λx + (1-λ)\ov x \| = λ \| x- \ov x \| = \frac{1}{2}ε.
+\end{align*}
+Also $x_λ \in U_{ε}(\ov x) \cap M$ und folglich
+\begin{align*}
+    f(\ov x) &\le f(x_λ) = f(λx + (1-λ) \ov x ) \\
+    &\le λ f(x) + (1-λ) f(\ov x)
+\end{align*}
+und $f(\ov x) \le f(x)$. 
+$\ov x$ ist damit globaler Optimierer.
+\end{proof}
+Über strikte Konvexität erhält man auch Eindeutigkeit des globalen Minimums.
+
+Das nächste Beispiel ist eine Anwendung der Resultate:
+\begin{bsp}\label{2.24}
+Wir nehmen Bezug auf Bsp. \ref{1.1}. 
+Hier ist $X = ℝ^2$ der reelle und reflexive Banachraum und
+$$M = \{ x\in ℝ^2 : 1000 \le x_1^2 x_2 , x_1 \le 3x_2, x_2 \le x_1, 0\le x_1 \le 50, x_2 \ge 0\} \subset X.$$
+Dann ist $M$ nicht-leer, konvex und abgeschlossen sowie beschränkt.
+Die Zielfunktion 
+$f\colon M \to ℝ, \; x= (x_1, x_2) \mapsto lx_1x_2$
+ist stetig.
+Außerdem gilt
+$$f(x_1, x_2 ) = lx_1 x_2 \le α ⇔ x_1x_2 \le \frac{α}{l}$$
+und 
+$$M_α = \left\{ (x_1, x_2 ) \in ℝ^2 : x_1 x_2 \le \frac{α}{l}\right\}$$
+ist nicht konvex, wie man sich graphisch verdeutlicht.
+Somit ist Satz \ref{2.19} nicht anwendbar.
+Allerdings liefert der Satz on Weierstraß die Existenz von Extrempunkten.
+\end{bsp}
+
+\section{Approximationsaufgaben}\label{section:2.3}
+Approximationsaufgaben haben die Form:\\
+Sei $(X, \|•\|)$ ein reeller normierter Raum und $M\subset X, M\ne ∅$ und $\hat x \in X$ gegeben.
+Gesucht ist $\ov x \in M$ mit
+$$\| \ov x - \hat x \| \le \| x - \hat x \| \qquad ∀x\in M.$$
+
+\begin{mydef}
+\label{2.25}
+Sei $(X, \|•\|)$ ein reeller, linearer, normierter Raum. Die Menge $M\subset X,M\ne ∅$ heißt \emph{proximinal}, wenn für jedes $\hat x \in X$ ein $\ov x\in M$ existiert, so dass
+$$\| \ov x - \hat x \| \le \| x - \hat x \| \qquad ∀x \in M.$$
+Das Element $\ov x$ heißt dann Bestapproximierende von $\hat x$ in $M$.
+\end{mydef}
+\end{document}
